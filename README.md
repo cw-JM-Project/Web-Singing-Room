@@ -1,11 +1,12 @@
 
 Free Audio Editing Service
 
-This service is a service developed for the purpose of editing audio files for free on the web.
-It is a service based on Html, Css, NodeJS, and provides the function to adjust the audio speed, volume, and pitch.
-Additionally, we are also considering recordings that allow you to add or combine them into the original file.
+Free Audio Editing Service is a free audio editing web-site based on Html, Css, NodeJS.
+Our service offers several features, including adjust the audio speed, volume, and pitch. 
+Also, we are considering to develop a new recording tool that allows users to merge different files together.
 
 Reference open source
+
 
 SoundTouchJS (URL : https://github.com/cutterbl/SoundTouchJS.git)
 deniscerri converter (URL : https://github.com/deniscerri/converter.git)
