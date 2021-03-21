@@ -19,17 +19,28 @@ const currTime = document.getElementById('currentTime');
 const duration = document.getElementById('duration');
 const progressMeter = document.getElementById('progressMeter');
 
+const mic_record = document.getElementById('mc_record');
+const mic_stop = document.getElementById('mc_stop');
+const mic_audio = document.getElementById('mc_audio');
+
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const gainNode = audioCtx.createGain();
+
+
+
 let shifter;
 
 var fileInput = document.querySelector('input[type="file"]');
 
-const echoBtn = document.getElementById('echo');
 var description = "";
 
 var recorder;
+let chunks = [];
 
+var mc_source;
+var mc_analyser;
+var mc_bufferLength;
+var mc_dataArray;
 
 const loadSource = function (url) {
   playBtn.setAttribute('disabled', 'disabled');
@@ -120,7 +131,113 @@ progressMeter.addEventListener('click', function (event) {
   }
 });
 
-echoBtn.addEventListener('click', function () {
+
+if (navigator.mediaDevices.getUserMedia) {
+  console.log('getUserMedia supported.');
+
+  const constraints = { audio: true };
+  chunks = [];
+
+  let onSuccess = function(stream) {
+    const mediaRecorder = new MediaRecorder(stream);
+
+    visualize(stream);
+
+    mic_record.onclick = function() {
+      mediaRecorder.start();
+      console.log(mediaRecorder.state);
+      console.log("recorder started");
+      mic_record.style.background = "red";
+
+      mic_stop.disabled = false;
+      mic_record.disabled = true;
+    }
+
+    mic_stop.onclick = function() {
+      mediaRecorder.stop();
+      console.log(mediaRecorder.state);
+      console.log("recorder stopped");
+      mic_record.style.background = "";
+      mic_record.style.color = "";
+      // mediaRecorder.requestData();
+
+      mic_stop.disabled = true;
+      mic_record.disabled = false;
+    }
+
+    mediaRecorder.onstop = function(e) {
+      console.log("data available after MediaRecorder.stop() called.");
+
+      //const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+
+      //const clipContainer = document.createElement('article');
+      //const clipLabel = document.createElement('p');
+      
+      const deleteButton = document.createElement('button');
+
+      //clipContainer.classList.add('clip');
+      mic_audio.setAttribute('controls', '');
+      deleteButton.textContent = 'Delete';
+      deleteButton.className = 'delete';
+
+      /*if(clipName === null) {
+        clipLabel.textContent = 'My unnamed clip';
+      } else {
+        clipLabel.textContent = clipName;
+      }*/
+
+      //clipContainer.appendChild(audio);
+      //clipContainer.appendChild(clipLabel);
+      //clipContainer.appendChild(deleteButton);
+      //soundClips.appendChild(clipContainer);
+
+      mic_audio.controls = true;
+      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' });
+      chunks = [];
+      const audioURL = window.URL.createObjectURL(blob);
+      mic_audio.src = audioURL;
+      console.log("recorder stopped");
+
+      deleteButton.onclick = function(e) {
+        let evtTgt = e.target;
+        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+      }
+
+      /*clipLabel.onclick = function() {
+        const existingName = clipLabel.textContent;
+        const newClipName = prompt('Enter a new name for your sound clip?');
+        if(newClipName === null) {
+          clipLabel.textContent = existingName;
+        } else {
+          clipLabel.textContent = newClipName;
+        }
+      }*/
+    }
+
+    mediaRecorder.ondataavailable = function(e) {
+      chunks.push(e.data);
+    }
+  }
+
+  let onError = function(err) {
+    console.log('The following error occured: ' + err);
+  }
+
+  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
+
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
+
+function visualize(stream) {
   
-  
-});
+
+  mc_source = audioCtx.createMediaStreamSource(stream);
+
+  mc_analyser = audioCtx.createAnalyser();
+  mc_analyser.fftSize = 2048;
+  mc_bufferLength = mc_analyser.frequencyBinCount;
+  mc_dataArray = new Uint8Array(mc_bufferLength);
+
+  mc_source.connect(mc_analyser);
+}
