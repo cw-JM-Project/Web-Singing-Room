@@ -42,7 +42,7 @@ var mc_analyser;
 var mc_bufferLength;
 var mc_dataArray;
 
-const loadSource = function (url) {
+const loadSource = function (url) { //음성 파일 로드
   playBtn.setAttribute('disabled', 'disabled');
   if (shifter) {
     shifter.off();
@@ -68,7 +68,7 @@ const loadSource = function (url) {
 };
 
 let is_playing = false;
-const play = function () {
+const play = function () { //재생 기능
   shifter.connect(gainNode);
   gainNode.connect(audioCtx.destination);
   audioCtx.resume().then(() => {
@@ -77,18 +77,18 @@ const play = function () {
   });
 };
 
-const pause = function (playing = false) {
+const pause = function (playing = false) { //멈춤 기능
   shifter.disconnect();
   is_playing = playing;
   playBtn.removeAttribute('disabled');
 };
 
-fileInput.addEventListener(
+fileInput.addEventListener( //파일 불러오기 
   "change",
   function () {
     var reader = new FileReader();
     reader.addEventListener("load", function () {
-      loadSource(this.result);
+      loadSource(this.result); //음성 파일 로드
       playBtn.onclick = play;
       stopBtn.onclick = pause;
     });
@@ -98,27 +98,27 @@ fileInput.addEventListener(
   false
 );
 
-tempoSlider.addEventListener('input', function () {
+tempoSlider.addEventListener('input', function () { //속도 조절 기능
   tempoOutput.innerHTML = shifter.tempo = this.value;
 });
 
-pitchSlider.addEventListener('input', function () {
+pitchSlider.addEventListener('input', function () { //음정 높낮이 조절 기능
   pitchOutput.innerHTML = shifter.pitch = this.value;
   shifter.tempo = tempoSlider.value;
   
 });
 
-keySlider.addEventListener('input', function () {
+keySlider.addEventListener('input', function () { //음성 키 조절 기능(음정에 따라 속도도 조절)
   shifter.pitchSemitones = this.value;
   keyOutput.innerHTML = this.value / 2;
   shifter.tempo = tempoSlider.value;
 });
 
-volumeSlider.addEventListener('input', function () {
+volumeSlider.addEventListener('input', function () { //볼륨 조절 기능
   volumeOutput.innerHTML = gainNode.gain.value = this.value;
 });
 
-progressMeter.addEventListener('click', function (event) {
+progressMeter.addEventListener('click', function (event) { //재생 디스플레이 (초단위)
   const pos = event.target.getBoundingClientRect();
   const relX = event.pageX - pos.x;
   const perc = relX / event.target.offsetWidth;
@@ -131,8 +131,8 @@ progressMeter.addEventListener('click', function (event) {
   }
 });
 
-
-if (navigator.mediaDevices.getUserMedia) {
+//녹음
+if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가?
   console.log('getUserMedia supported.');
 
   const constraints = { audio: true };
@@ -143,17 +143,17 @@ if (navigator.mediaDevices.getUserMedia) {
 
     visualize(stream);
 
-    mic_record.onclick = function() {
-      mediaRecorder.start();
-      console.log(mediaRecorder.state);
+    mic_record.onclick = function() { //start_record 버튼
+      mediaRecorder.start(); //녹음 시작
+      console.log(mediaRecorder.state); //녹음 되는지 확인
       console.log("recorder started");
-      mic_record.style.background = "red";
+      mic_record.style.background = "red"; //실행되면 레드 버튼
 
-      mic_stop.disabled = false;
-      mic_record.disabled = true;
+      mic_stop.disabled = false; //재생중이니까 멈춤 버튼 활성화
+      mic_record.disabled = true; //녹음중이니까 녹음 버튼 비활성화
     }
 
-    mic_stop.onclick = function() {
+    mic_stop.onclick = function() { //stop_record 버튼
       mediaRecorder.stop();
       console.log(mediaRecorder.state);
       console.log("recorder stopped");
@@ -165,7 +165,7 @@ if (navigator.mediaDevices.getUserMedia) {
       mic_record.disabled = false;
     }
 
-    mediaRecorder.onstop = function(e) {
+    mediaRecorder.onstop = function(e) { //stop 버튼 눌려졌을때 이벤트 발생
       console.log("data available after MediaRecorder.stop() called.");
 
       //const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
@@ -191,17 +191,17 @@ if (navigator.mediaDevices.getUserMedia) {
       //clipContainer.appendChild(deleteButton);
       //soundClips.appendChild(clipContainer);
 
-      mic_audio.controls = true;
-      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' });
-      chunks = [];
-      const audioURL = window.URL.createObjectURL(blob);
-      mic_audio.src = audioURL;
+      mic_audio.controls = true; //녹음한거 재생 디스플레이 띄우는 기능 html 넣어놨음
+      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' }); //블랍 객체 생성 오디오 중 mp3 형식의 데이터
+      chunks = []; //그 데이터의 변수 이름인 chunks 초기화
+      const audioURL = window.URL.createObjectURL(blob); //녹음 디스플레이에 audio 넣어주려고 url 변수 생성
+      mic_audio.src = audioURL; //소스에 값 audio url 부여
       console.log("recorder stopped");
 
-      deleteButton.onclick = function(e) {
+      /*deleteButton.onclick = function(e) {
         let evtTgt = e.target;
         evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-      }
+      }*/
 
       /*clipLabel.onclick = function() {
         const existingName = clipLabel.textContent;
@@ -214,8 +214,8 @@ if (navigator.mediaDevices.getUserMedia) {
       }*/
     }
 
-    mediaRecorder.ondataavailable = function(e) {
-      chunks.push(e.data);
+    mediaRecorder.ondataavailable = function(e) { //chunks 배열에 녹음이 되는 순간 미디어레코더의 이벤트가 발생했다
+      chunks.push(e.data); //chunks에 축적된 음성 데이터 넣음
     }
   }
 
@@ -223,13 +223,13 @@ if (navigator.mediaDevices.getUserMedia) {
     console.log('The following error occured: ' + err);
   }
 
-  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
+  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError); //마이크 액세스 거부 당하면 에러 메세지 
 
 } else {
    console.log('getUserMedia not supported on your browser!');
 }
 
-function visualize(stream) {
+function visualize(stream) { //웹 오디오 api 쓸 때 필요한 것들 초기화 세팅
   
 
   mc_source = audioCtx.createMediaStreamSource(stream);
