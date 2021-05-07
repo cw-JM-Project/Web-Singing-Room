@@ -4,27 +4,27 @@ import { PitchShifter } from './soundtouch.js';
 
 const playBtn = document.getElementById('play');
 const stopBtn = document.getElementById('stop');
-const tempoCtrl = document.getElementById('tempoCtrl');
+const tempoCtrl = document.getElementById('tempoSlider');
 const tempoOutput = document.getElementById('tempo');
 tempoOutput.innerHTML = tempoCtrl.value;
-const pitchCtrl = document.getElementById('pitchCtrl');
+const pitchCtrl = document.getElementById('pitchSlider');
 const pitchOutput = document.getElementById('pitch');
 pitchOutput.innerHTML = pitchCtrl.value;
-const keyCtrl = document.getElementById('keyCtrl');
+const keyCtrl = document.getElementById('keySlider');
 const keyOutput = document.getElementById('key');
 keyOutput.innerHTML = keyCtrl.value;
-const volumeCtrl = document.getElementById('volumeCtrl');
+const volumeCtrl = document.getElementById('volumeSlider');
 const volumeOutput = document.getElementById('volume');
 volumeOutput.innerHTML = volumeCtrl.value;
 const currTime = document.getElementById('currentTime');
 const duration = document.getElementById('duration');
 const playMeter = document.getElementById('playMeter');
 
-const mic_record = document.getElementById('mic_record');
-const mic_stop = document.getElementById('mic_stop');
-const mic_audio = document.getElementById('mic_audio');
+const mic_record = document.getElementById('mc_record');
+const mic_stop = document.getElementById('mc_stop');
+const mic_audio = document.getElementById('mc_audio');
 
-const BringAudioBtn = document.getElementById('bring_audio');
+const BringAudioBtn = document.getElementById('mp3-button');
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const gainNode = audioCtx.createGain();
@@ -49,20 +49,20 @@ let loading_text = document.getElementsByClassName("loading")[0];
 
 const loadSource = function (url) { //음성 파일 로드
   playBtn.setAttribute('disabled', 'disabled');
-  if (shifter) {
+  if (shifter) { //기존 데이터가 있으면 초기화
     shifter.off();
   }
   fetch(url)
-    .then((response) => response.arrayBuffer())
+    .then((response) => response.arrayBuffer()) //response의 arrayBuffer를 buffer에 반환한다 
     .then((buffer) => {
       console.log('have array buffer');
-      audioCtx.decodeAudioData(buffer, (audioBuffer) => {
+      audioCtx.decodeAudioData(buffer, (audioBuffer) => { //buffer를 webaudioapi에 적용시킨다 적용시키면 아래 실행
         console.log('decoded the buffer');
-        shifter = new PitchShifter(audioCtx, audioBuffer, 16384);
-        shifter.tempo = tempoCtrl.value;
-        shifter.pitch = pitchCtrl.value;
-        loading_text.innerText="Loading Success!!"; 
-        shifter.on('play', (detail) => {
+        shifter = new PitchShifter(audioCtx, audioBuffer, 16384); //buffer를 기반으로 편집할 데이터 생성
+        shifter.tempo = tempoCtrl.value; //템포 기본값 적용
+        shifter.pitch = pitchCtrl.value; //피치 기본값 적용
+        loading_text.innerText="Loading Success!!";  //로딩 완료
+        shifter.on('play', (detail) => { //재생 시간 적용
           console.log(`timeplayed: ${detail.timePlayed}`);
           currTime.innerHTML = detail.formattedTimePlayed;
           playMeter.value = detail.percentagePlayed;
@@ -72,13 +72,10 @@ const loadSource = function (url) { //음성 파일 로드
       });
     });
 };
-
-
 BringAudioBtn.addEventListener('click', function () { //음성 추출
-  
   loading_text.innerText="Loading . . ."; //로딩 중
-  loadSource(`${'https://denisytdl.herokuapp.com'}/download/${'yt'}/?URL=${URLinput.value}`);
-  
+  loadSource(`${'https://denisytdl.herokuapp.com'}/download/${'yt'}/?URL=${URLinput.value}`); 
+  //heroku서버에 있는 유튜브 다운로더 api에 입력된URL 값을 보내 다운로드 실행
   playBtn.onclick = play;
   stopBtn.onclick = pause;
   console.log(`good`);
@@ -183,7 +180,6 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가
       console.log("recorder stopped");
       mic_record.style.background = "";
       mic_record.style.color = "";
-     
       mic_stop.disabled = true;
       mic_record.disabled = false;
     }
@@ -191,12 +187,9 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가
     mediaRecorder.onstop = function(e) { //stop 버튼 눌러졌을때 이벤트 발생
       console.log("data available after MediaRecorder.stop() called.");
       
-      const deleteButton = document.createElement('button');
-
+      
       mic_audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
-      deleteButton.className = 'delete';
-
+      
       mic_audio.controls = true; //녹음한거 재생 디스플레이 띄우는 기능 html 넣어놨음
       
       const blob = new Blob(chunks, { 'type' : 'audio/mp3;' }); //블랍 객체 생성 오디오 중 mp3 형식의 데이터
