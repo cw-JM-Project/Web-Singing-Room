@@ -33,15 +33,12 @@ let shifter;
 
 var fileInput = document.querySelector('input[type="file"]');
 
-var description = "";
 
-var recorder;
 let chunks = [];
 
 var mic_source;
 var mic_analyser;
 var mic_bufferLength;
-var mic_dataArray;
 
 let loading_text = document.getElementsByClassName("loading")[0];
 
@@ -88,11 +85,10 @@ fileInput.addEventListener( //파일 불러오기
     var fReader = new FileReader();
     fReader.addEventListener("load", function () {
       loadSource(this.result); //음성 파일 로드
-      playBtn.onclick = play;
-      stopBtn.onclick = pause;
+      playBtn.onclick = play; //버튼 활성화
+      stopBtn.onclick = pause; //버튼 활성화
     });
     fReader.readAsDataURL(this.files[0]);
-    description += (this.files[0]).name.replace(/\..*|\s+/g, "");
   },
   false
 );
@@ -223,7 +219,6 @@ function visualize(stream) { //웹 오디오 api 쓸 때 필요한 것들 초기
   mic_analyser = audioCtx.createAnalyser();
   mic_analyser.fftSize = 2048;
   mic_bufferLength = mic_analyser.frequencyBinCount;
-  mic_dataArray = new Uint8Array(mic_bufferLength);
-
+  
   mic_source.connect(mic_analyser);
 }
