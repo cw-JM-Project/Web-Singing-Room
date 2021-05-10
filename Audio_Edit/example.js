@@ -106,7 +106,7 @@ const play = function () { //재생
 
 const pause = function (playing = false) { //일시정지
   shifter.disconnect();
-  is_playing = playing;
+  is_playing = false;
   playBtn.removeAttribute('disabled');
 };
 
@@ -145,7 +145,7 @@ playMeter.addEventListener('click', function (event) { //재생 바(초단위)
 
 
 //녹음 기능
-if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가?
+if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
   console.log('getUserMedia supported.');
 
   const constraints = { audio: true };
@@ -156,48 +156,44 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가
 
     visualize(stream);
 
-    mic_record.onclick = function() { //start_record 버튼 누르면
+    mic_record.onclick = function() { 
       mediaRecorder.start(); //녹음 시작
       if (!is_playing) {
         play();
       }
-      console.log(mediaRecorder.state); //녹음 되는지 확인
+      console.log(mediaRecorder.state);
       console.log("recorder started");
-      mic_record.style.background = "red"; //실행되면 레드 버튼
-
-      mic_stop.disabled = false; //재생중이니까 멈춤 버튼 활성화
-      mic_record.disabled = true; //녹음중이니까 녹음 버튼 비활성화
+      mic_record.style.background = "red";
+      mic_stop.disabled = false; //중지(완료) 버튼 활성화
+      mic_record.disabled = true; //녹음 버튼 비활성화
     }
 
-    mic_stop.onclick = function() { //stop_record 버튼 누르면
-      mediaRecorder.stop();
+    mic_stop.onclick = function() { 
+      mediaRecorder.stop(); //녹음 중지
       pause();
       console.log(mediaRecorder.state);
       console.log("recorder stopped");
       mic_record.style.background = "";
       mic_record.style.color = "";
-      mic_stop.disabled = true;
-      mic_record.disabled = false;
+      mic_stop.disabled = true; //중지(완료) 버튼 비활성화
+      mic_record.disabled = false; //녹음 버튼 활성화
     }
 
-    mediaRecorder.onstop = function(e) { //stop 버튼 눌러졌을때 이벤트 발생
+    mediaRecorder.onstop = function(e) { 
       console.log("data available after MediaRecorder.stop() called.");
-      
-      
       mic_audio.setAttribute('controls', '');
+      mic_audio.controls = true;
       
-      mic_audio.controls = true; //녹음한거 재생 디스플레이 띄우는 기능 html 넣어놨음
-      
-      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' }); //블랍 객체 생성 오디오 중 mp3 형식의 데이터
-      chunks = []; //그 데이터(chunks) 초기화
-      const audioURL = window.URL.createObjectURL(blob); //녹음 디스플레이에 audio 넣어주려고 url 변수 생성
-      mic_audio.src = audioURL; //소스에 값 audio url 부여
+      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' }); //블랍 객체 생성
+      chunks = []; //음성 데이터 배열 초기화
+      const audioURL = window.URL.createObjectURL(blob); //가상 URL 생성
+      mic_audio.src = audioURL; 
       console.log("recorder stopped");
   
     }
 
-    mediaRecorder.ondataavailable = function(e) { //chunks 배열에 녹음이 되는 순간 미디어레코더의 이벤트 발생
-      chunks.push(e.data); //chunks에 축적된 음성 데이터 넣음
+    mediaRecorder.ondataavailable = function(e) { //녹음 되면
+      chunks.push(e.data); //배열 축적된 음성 데이터 저장
     }
   }
 
@@ -212,7 +208,7 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 액세스 허용했는가
 }
 
 
-function visualize(stream) { //웹 오디오 api 쓸 때 필요한 것들 초기화 
+function visualize(stream) { //새로운 스트림 생성하여 스트림 초기화
   
   mic_source = audioCtx.createMediaStreamSource(stream);
 
