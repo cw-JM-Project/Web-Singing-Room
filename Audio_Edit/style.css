@@ -1,15 +1,20 @@
-
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: 'Roboto',Arial,sans-serif;
 }
 
+#img_main{
+  text-align: center;
+}
+
+.box-file-input{
+  text-align: center;
+}
 
 .box-file-input label{
   display:inline-block;
-  background:#312dff;
+  background:#663ED7;
   border: 2px solid;
   border-radius: 10px;
   color:#fff;
@@ -26,8 +31,6 @@
   display:none;
 }
 
-
-
 button,
 button::after {
   -webkit-transition: all 0.3s;
@@ -38,7 +41,7 @@ button::after {
 
 button {
   background: none;
-  border: 2px solid #312dff;
+  border: 2px solid #663ED7;
   border-radius: 5px;
   color: #FFF;
   display: block;
@@ -59,7 +62,7 @@ button::after {
 }
 
 button:hover {
-  color: #312dff;
+  color: #663ED7;
 }
 
 #play::before {
@@ -70,7 +73,7 @@ button:hover {
 }
 
 #play::after {
-  background: #312dff;
+  background: #663ED7;
   height: 100%;
   left: 0;
   top: 0;
@@ -92,7 +95,7 @@ button:hover {
 }
 
 #stop::after {
-  background: #312dff;
+  background: #663ED7;
   height: 100%;
   left: 0;
   top: 0;
@@ -106,8 +109,6 @@ button:hover {
   width: 0;
 }
 
-
-
 #mc_record::before {
   height: 100%;
   left: 0;
@@ -116,7 +117,7 @@ button:hover {
 }
 
 #mc_record::after {
-  background: #312dff;
+  background: #663ED7;
   height: 100%;
   left: 0;
   top: 0;
@@ -138,7 +139,7 @@ button:hover {
 }
 
 #mc_stop::after {
-  background: #312dff;
+  background: #663ED7;
   height: 100%;
   left: 0;
   top: 0;
@@ -152,7 +153,6 @@ button:hover {
   width: 0;
 }
 
-
 footer{
   position: relative;
   bottom: 0;
@@ -163,12 +163,10 @@ footer{
   color: #717171;
 }
 
-
 .container{
-  width: 100%;
-	max-width: 1100px;
+  text-align: center;
+	max-width: 100%;
 	margin: 0;
-	padding: 0 15px;
 }
 
 .searchArea{
@@ -182,8 +180,6 @@ footer{
 .searchArea button{
   float: initial;
 }
-
-
 
 .URL-input, .button{
   color: white;
@@ -200,7 +196,6 @@ footer{
   outline: none;
   background-color: #29287a;
   border: none;
-  
 }
 
 .URL-input:focus{
@@ -210,7 +205,7 @@ footer{
 .button{
   cursor: pointer;
   border-radius: 10px;
-  border: 2px solid #312dff;
+  border: 2px solid #663ED7;
   background:  #ffffff;
   margin: 10px 0px 0px 5px;
 }
@@ -219,6 +214,8 @@ footer{
   background:#323232;
   border: 2px solid #323232;
   color: #6f6f6f;
+  position: absolute;
+  left:50%;
 }
 
 .button:hover, .button:active, #search-button:active{
@@ -228,83 +225,24 @@ footer{
   transition: .1s;
 }
 
-.results-info{
-  margin: 0;
-  padding: 5px 0 0 10px;
-}
-
-.results-info h1{
-  font-weight: normal;
-}
-
-
-.results-item{
-  padding: 5vh 0 5vh 0 5vh;
-  margin: 0 0 20px 0;
-  width: 100%;
-}
-
-.results-item:nth-child(1){
-  display: none;
-}
-
-.results-img {
-  display:inline-flex;
-  position: relative;
-}
-
-#results-img{
-  border-radius: 10px;
-}
-
-#length{
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 3px 4px;
-  margin: 4px;
-  background: black;
-
-  font-size: 12px;
-  border-radius: 2px;
-}
-
-
 #resultBtn{
   width: 50px;
 }
 
-
-
 @media screen and (min-width: 200px){
- 
 	.URL-input{
     width: 100%;
     font-size: 17px;
     height: 50px;
   }
+
   #search-button{
     font-size: 20px;
-  }
-
-
-  
-
-  .results-img img{
-    width: 100%;
-  }
-
-
-  .results-info h1{
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: left;
   }
 
   .button{
     font-size: 1rem;
   }
-  
 }
 
 
@@ -316,21 +254,6 @@ footer{
     height: initial;
   }
 
-  .results-info{
-    padding-left: 15px;
-  }
-
-  .results-info h1{
-    font-size: 18px;
-    margin-top: 0;
-    text-align: left;
-  }
-
-  .results-info p:nth-child(2), .results-info p:nth-child(3){
-    margin-top: 10px;
-  }
-
-  
   .button{
     font-size: initial;
     position: relative;
@@ -340,16 +263,9 @@ footer{
   #search-button{
     float: initial;
   }
-
-  .results-item{
-    display: inline-flex;
-    padding: 3px;
-  }
-
 }
 
 @media screen and (min-width: 980px){
-  
 	.URL-input{
     width: 50rem;
     margin: 0 10px;
@@ -359,14 +275,46 @@ footer{
   .button{
     font-size: 20px;
   }
-
-
-
 }
 
+body {
+  background: #EEEEEE;
+  line-height: 30px;
+}
 
+.progress{
+  width:200px; 
+  margin: 0 auto
+}
 
+.progress,
+#playMeter {
+  width: 400px;
+}
 
+.progress #duration {
+  position: relative;
+  float: right;
+}
 
+.record-bt{
+  position: absolute;
+  left: 50%;
+  margin-left: -70px;
+}
 
+.record-result{
+  
+  position: absolute;
+  left: 50%;
+  margin-left: -140px;
+}
 
+.audio-edit{
+  width:180px; 
+  margin: 0 auto
+}
+
+.load{
+  text-align:center;
+}

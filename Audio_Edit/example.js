@@ -43,7 +43,6 @@ var mic_bufferLength;
 let loading_text = document.getElementsByClassName("loading")[0];
 
 
-
 const loadSource = function (url) { //음성 파일 로드
   playBtn.setAttribute('disabled', 'disabled');
   if (shifter) { //기존 데이터가 있으면 초기화
@@ -70,6 +69,7 @@ const loadSource = function (url) { //음성 파일 로드
     });
 };
 BringAudioBtn.addEventListener('click', function () { //음성 추출
+  
   loading_text.innerText="Loading . . ."; //로딩 중
   loadSource(`${'https://denisytdl.herokuapp.com'}/download/${'yt'}/?URL=${URLinput.value}`); 
   //heroku서버에 있는 유튜브 다운로더 api에 입력된URL 값을 보내 다운로드 실행
