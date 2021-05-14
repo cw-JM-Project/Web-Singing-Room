@@ -28,21 +28,21 @@ Chrome 버전 90 이상 사용 권장
 
 ## 사용 예제
 
-<p align="center"><img src="https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278311-d7cd8880-b504-11eb-82da-79a471a88eae.png"></p>
 1. 사이트 접속 {:.aligncenter}
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/74241604/118260281-0d667780-b4ed-11eb-8c2d-90384f20dc45.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278464-fd5a9200-b504-11eb-82ee-ab40d0307b62.png"></p>
 2. 오디오 파일 입력
    2-1. 유튜브 URL-주소 입력하여 오디오 추출
    2-2. 사용자의 로컬에서 오디오 파일 선택
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/74241604/118260331-23743800-b4ed-11eb-80e4-abe15d318af7.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278502-077c9080-b505-11eb-925b-b7cde1afed36.png"></p>
 3. 재생 및 오디오 편집
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/74241604/118260376-338c1780-b4ed-11eb-8a3c-77b7672afff2.png"></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278562-15caac80-b505-11eb-9527-5dca6289e7ae.png"></p>
 4. 녹음 및 녹음된 음성 재생
 
 
