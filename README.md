@@ -8,7 +8,7 @@ Also, it includes the feature to record your voice while playing the edited audi
 
 ![](../header.png)
 
-## 실행 방법
+## 실행 방법 및 권장 
 
 On-line:
 
@@ -24,29 +24,39 @@ npm start
 http://localhost:8080/
 ```
 
+Chrome 버전 90 이상 사용 권장
+
 ## 사용 예제
 
-![image](https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png)
+![image](https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png) {:.aligncenter}
 
-1. 전체 화면
+1. 사이트 접속 {:.aligncenter}
 
-![image](https://user-images.githubusercontent.com/74241604/118260281-0d667780-b4ed-11eb-8c2d-90384f20dc45.png)
 
-2. 유튜브 URL-주소 입력
-   (혹은 사용자 로컬에서 오디오 파일 불러오기 가능)
+![image](https://user-images.githubusercontent.com/74241604/118260281-0d667780-b4ed-11eb-8c2d-90384f20dc45.png) {:.aligncenter}
 
-![image](https://user-images.githubusercontent.com/74241604/118260331-23743800-b4ed-11eb-80e4-abe15d318af7.png)
+2. 오디오 파일 입력
+   2-1. 유튜브 URL-주소 입력하여 오디오 추출
+   2-2. 사용자의 로컬에서 오디오 파일 선택
+
+
+![image](https://user-images.githubusercontent.com/74241604/118260331-23743800-b4ed-11eb-80e4-abe15d318af7.png) {:.aligncenter}
 
 3. 재생 및 오디오 편집
 
-![image](https://user-images.githubusercontent.com/74241604/118260376-338c1780-b4ed-11eb-8a3c-77b7672afff2.png)
 
-4. 녹음 된 음성 재생
+![image](https://user-images.githubusercontent.com/74241604/118260376-338c1780-b4ed-11eb-8a3c-77b7672afff2.png) {:.aligncenter}
 
-## 실행 환경
+4. 녹음 및 녹음된 음성 재생
 
-    Chrome 버전 90 이상 사용 권장
 
+## 개발 환경
+
+   OS: Windows 10
+   개발 기기: Laptop
+   사용 언어: Html, Css, Node.js
+   IDE: Visual Studio Code
+   
 ## 업데이트 내역
 
 
