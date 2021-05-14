@@ -54,10 +54,10 @@ Chrome 버전 90 이상 사용 권장
 
 ## 개발 환경
 
-   OS: Windows 10
-   개발 기기: Laptop
-   사용 언어: Html, Css, Node.js
-   IDE: Visual Studio Code
+   OS: Windows 10  
+   개발 기기: Laptop  
+   사용 언어: Html, Css, Node.js  
+   IDE: Visual Studio Code  
    
 
 ## 참고
