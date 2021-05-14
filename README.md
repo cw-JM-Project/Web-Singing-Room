@@ -28,7 +28,7 @@ Chrome 버전 90 이상 사용 권장
 
 ## 사용 예제
 
-![image](https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png) {:.aligncenter}
+![image](https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png){:.aligncenter}
 
 1. 사이트 접속 {:.aligncenter}
 
