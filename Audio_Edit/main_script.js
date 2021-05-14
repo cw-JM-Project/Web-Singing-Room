@@ -1,7 +1,5 @@
-
 import { PitchShifter } from './soundtouch.js';
 //getElementById 메소드는 주어진 문자열과 일치하는 id 속성을 가진 요소를 찾고, 이를 나타내는 Element 객체 반환
-
 const playBtn = document.getElementById('play');
 const stopBtn = document.getElementById('stop');
 const tempoCtrl = document.getElementById('tempoSlider');
@@ -30,29 +28,23 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const gainNode = audioCtx.createGain();
 
 let shifter;
-
 var fileInput = document.querySelector('input[type="file"]');
-
-
 let chunks = [];
-
 var mic_source;
 var mic_analyser;
 var mic_bufferLength;
-
 let loading_text = document.getElementsByClassName("loading")[0];
 
-
-const loadSource = function (url) { //음성 파일 로드
+const loadSource = function (url) { //오디오 추출
   playBtn.setAttribute('disabled', 'disabled');
   if (shifter) { //기존 데이터가 있으면 초기화
     shifter.off();
   }
   fetch(url)
-    .then((response) => response.arrayBuffer()) //response의 arrayBuffer를 buffer에 반환한다 
+    .then((response) => response.arrayBuffer()) //response 객체 통해 arrayBuffer를 buffer에 반환한다 
     .then((buffer) => {
       console.log('have array buffer');
-      audioCtx.decodeAudioData(buffer, (audioBuffer) => { //buffer를 webaudioapi에 적용시킨다 적용시키면 아래 실행
+      audioCtx.decodeAudioData(buffer, (audioBuffer) => { //buffer를 webaudioapi에 적용 후 아래 실행
         console.log('decoded the buffer');
         shifter = new PitchShifter(audioCtx, audioBuffer, 16384); //buffer를 기반으로 편집할 데이터 생성
         shifter.tempo = tempoCtrl.value; //템포 기본값 적용
@@ -62,14 +54,17 @@ const loadSource = function (url) { //음성 파일 로드
           console.log(`timeplayed: ${detail.timePlayed}`);
           currTime.innerHTML = detail.formattedTimePlayed;
           playMeter.value = detail.percentagePlayed;
+          if(duration.innerHTML <= currTime.innerHTML) {
+            pause();
+          }
         });
         duration.innerHTML = shifter.formattedDuration;
         playBtn.removeAttribute('disabled');
       });
     });
 };
-BringAudioBtn.addEventListener('click', function () { //음성 추출
-  
+
+BringAudioBtn.addEventListener('click', function () { //음성 추출 버튼 이벤트
   loading_text.innerText="Loading . . ."; //로딩 중
   loadSource(`${'https://denisytdl.herokuapp.com'}/download/${'yt'}/?URL=${URLinput.value}`); 
   //heroku서버에 있는 유튜브 다운로더 api에 입력된URL 값을 보내 다운로드 실행
@@ -77,7 +72,6 @@ BringAudioBtn.addEventListener('click', function () { //음성 추출
   stopBtn.onclick = pause;
   console.log(`good`);
 });
-
 
 fileInput.addEventListener( //파일 불러오기 
   "change",
@@ -92,7 +86,6 @@ fileInput.addEventListener( //파일 불러오기
   },
   false
 );
-
 
 let is_playing = false;
 const play = function () { //재생
@@ -111,7 +104,8 @@ const pause = function (playing = false) { //일시정지
 };
 
 volumeCtrl.addEventListener('input', function () { //볼륨 조절 기능
-  volumeOutput.innerHTML = gainNode.gain.value = this.value;
+  volumeOutput.innerHTML = this.value;
+  gainNode.gain.value = this.value;
 });
 
 tempoCtrl.addEventListener('input', function () { //속도 조절 기능
@@ -129,7 +123,6 @@ keyCtrl.addEventListener('input', function () { //음성 키 조절 기능(음�
   shifter.tempo = tempoCtrl.value;
 });
 
-
 playMeter.addEventListener('click', function (event) { //재생 바(초단위)
   const pos = event.target.getBoundingClientRect();
   const relX = event.pageX - pos.x;
@@ -143,15 +136,14 @@ playMeter.addEventListener('click', function (event) { //재생 바(초단위)
   }
 });
 
-
-//녹음 기능
-if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
+//음성 녹음
+if (navigator.mediaDevices.getUserMedia) { //사용 권한 요청
   console.log('getUserMedia supported.');
 
-  const constraints = { audio: true };
+  const constraints = { audio: true }; //오디오만 사용함
   chunks = [];
 
-  let onSuccess = function(stream) {
+  let onSuccess = function(stream) { //마이크 사용 권한 허용
     const mediaRecorder = new MediaRecorder(stream);
 
     visualize(stream);
@@ -163,7 +155,11 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
       }
       console.log(mediaRecorder.state);
       console.log("recorder started");
-      mic_record.style.background = "red";
+     
+      mic_stop.style.display=""
+      mic_stop.style.filter='Gray';
+      mic_record.style.display="none"
+
       mic_stop.disabled = false; //중지(완료) 버튼 활성화
       mic_record.disabled = true; //녹음 버튼 비활성화
     }
@@ -173,8 +169,11 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
       pause();
       console.log(mediaRecorder.state);
       console.log("recorder stopped");
-      mic_record.style.background = "";
-      mic_record.style.color = "";
+      
+      mic_record.style.display=""
+      mic_record.style.filter='';
+      mic_stop.style.display="none"
+      
       mic_stop.disabled = true; //중지(완료) 버튼 비활성화
       mic_record.disabled = false; //녹음 버튼 활성화
     }
@@ -184,7 +183,7 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
       mic_audio.setAttribute('controls', '');
       mic_audio.controls = true;
       
-      const blob = new Blob(chunks, { 'type' : 'audio/mp3;' }); //블랍 객체 생성
+      const blob = new Blob(chunks, { 'type' : 'audio/ogg codecs=opus;' }); //블랍 객체 생성
       chunks = []; //음성 데이터 배열 초기화
       const audioURL = window.URL.createObjectURL(blob); //가상 URL 생성
       mic_audio.src = audioURL; 
@@ -197,24 +196,20 @@ if (navigator.mediaDevices.getUserMedia) { //마이크 사용 권한 허용
     }
   }
 
-  let onError = function(err) {
+  let onError = function(err) { //마이크 사용 권한 거부
     console.log('The following error occured: ' + err);
   }
 
-  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError); //마이크 액세스 거부 당했을때 메세지 
+  navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError); //허용 시 onSuccess, 거부 시 onError
 
 } else {
    console.log('getUserMedia not supported on your browser!');
 }
 
-
 function visualize(stream) { //새로운 스트림 생성하여 스트림 초기화
-  
   mic_source = audioCtx.createMediaStreamSource(stream);
-
   mic_analyser = audioCtx.createAnalyser();
   mic_analyser.fftSize = 2048;
   mic_bufferLength = mic_analyser.frequencyBinCount;
-  
   mic_source.connect(mic_analyser);
 }

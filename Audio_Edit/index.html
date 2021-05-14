@@ -1,130 +1,160 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>soundtouch.js demo</title>
-    <link rel="shortcut icon" href="https://www.iconfinder.com/data/icons/hawcons/32/698392-icon-129-cloud-download-512.png" type="image/x-icon" />
-   <link rel="stylesheet" href="style.css">
-   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-</head>
-
-<body>
-    <p id="img_main"> <img src="./logos/main.jpg"> </p>
-
-    <div class="container">
-        <div class="searchArea">
-            <input type="text" class="URL-input" placeholder="Search or Insert Youtube Video Link...">
-            <button class="button" id="mp3-button"><img src="./logos/audio.png"></p></button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Free Audio Editing Web Service</title>
+        <link rel="shortcut icon" href="logos/icon.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="title-name">
+            <br>Free Audio Editing Web Service
         </div>
-    </div>
 
-    <script type="text/javascript" src="script.js"></script>
+        <p id="img_main"> <img src="./logos/main.jpg"> </p>
 
-    <div class="load">
-        <span class="loading"></span>
-    </div>
-    <div class="box-file-input"> <!--파일선택부분-->
-        <label>
-            <input type="file" name="audio-src" class="file-input" accept="audio/*">
-        </label>
-    </div>
-    <br>
-    <div class="progress">
-        <button id="play" disabled>Play</button>
-        <button id="stop">Pause</button>
-        <div>
-            <span id="currentTime">0:00</span><span id="duration"></span>
+        <div class="container">
+            <div class="searchArea">
+                <input type="text" class="URL-input" placeholder="&nbsp;Insert Youtube Link Here!">
+                <button class="button" id="mp3-button"><img src="./logos/audio.png"></p></button>
+            </div>
         </div>
-        <progress id="playMeter" value="0" max="100"></progress>
-    </div>
-    <br>
-    <div class="audio-edit">
-        Rate: <input type="range" autofocus="true" min="0.1" max="4.0" name="tempoSlider" value="1.0" id="tempoSlider" step="0.01" list="temporange">
-        <datalist id="temporange">
-            <option value="0.1" label="0">
-            <option value="0.5">
-            <option value="1.0">
-            <option value="1.5">
-            <option value="2.0">
-            <option value="2.5">
-            <option value="3.0">
-            <option value="3.5">
-            <option value="4.0" label="4">
-        </datalist>
-        <div id="tempo"></div>
-        Pitch: <input type="range" autofocus="true" min="0.1" max="2.0" name="pitchSlider" value="1.0" id="pitchSlider" step="0.01" list="pitchrange">
-        
-        <datalist id="pitchrange">
-            <option value="0.1" label="0">
-            <option value="0.5">
-            <option value="1.0">
-            <option value="1.5">
-            <option value="2.0" label="2">
-        </datalist>
-        <div id="pitch"></div>
 
-        Key: <input type="range" autofocus="true" min="-7.0" max="7.0" name="keySlider" value="0" id="keySlider" step="1" list="keyrange">
-        <datalist id="keyrange">
-            <option value="-7">
-            <option value="-6">
-            <option value="-5">
-            <option value="-4">
-            <option value="-3">
-            <option value="-2">
-            <option value="-1">
-            <option value="0">
-            <option value="1">
-            <option value="2">
-            <option value="3">
-            <option value="4">
-            <option value="5">
-            <option value="6">
-            <option value="7">
-        </datalist>
-        <div id="key"></div>
+        <script type="text/javascript" src="sub_script.js"></script>
 
-        Vol: <input type="range" autofocus="true" min="0.0" max="10.0" name="volumeSlider" value="1.0" id="volumeSlider" step="0.01" list="volumerange">
-        <datalist id="volumerange">
-            <option value="0.0" label="0">
-            <option value="0.5">
-            <option value="1.0">
-            <option value="1.5">
-            <option value="2.0" label="2">
-            <option value="2.5">
-            <option value="3.0">
-            <option value="3.5">
-            <option value="4.0" label="4">
-            <option value="4.5">
-            <option value="5.0">
-            <option value="5.5">
-            <option value="6.0" label="6">
-            <option value="6.5">
-            <option value="7.0">
-            <option value="7.5">
-            <option value="8.0" label="8">
-            <option value="8.5">
-            <option value="9.0">
-            <option value="9.5">
-            <option value="10.0" label="10">
-        </datalist>
-        <div id="volume"></div>
-    </div>
-    
+        <div style="text-align: center; font-weight: bold; font-size: 20px;"> Or </div>
+        
+        <div class="box-file-input"> <!--파일선택부분-->
+            <label>
+                <input type="file" name="audio-src" class="file-input" accept="audio/*">
+            </label>
+        </div>
 
-    <div class = "record-bt">
-        <button id="mc_record" >start_record</button>
-        
-        <button id="mc_stop" >stop__record</button>
-        
-        
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class = "record-result">
-        <audio id="mc_audio"> </audio>
-    </div> 
-</body>
-    <script type="module" src="example.js"></script>
+        <div class="load">
+            <span class="loading"></span>
+        </div>
+
+        <br>
+
+        <div class="all-box">
+            <div class="no-space">
+                &nbsp;
+            </div>
+
+            <div class="description">
+                <br><br><br>
+                ● Our service offers several features, including adjust audio Tempo, Volume, Pitch, and Key.<br><br><br>
+                ● Also, it includes the feature to record your voice while playing the edited audio file.
+            </div>
+
+            <div class="edit-all">
+                <div class="progress">
+                    <br>
+                    <div>
+                        <span id="currentTime">0:00</span><span id="duration"></span>
+                    </div>
+                    <progress id="playMeter" value="0" max="100"></progress>
+                    <button id="play" disabled></button>
+                    <button id="stop"></button>
+                </div>
+                <br>
+                <div class="edit-box">
+                    <div>
+                        <div class="tempo-box">
+                            Tempo:<br><input type="range" autofocus="true" min="0.1" max="4.0" name="tempoSlider" value="1.0" id="tempoSlider" step="0.01" list="temporange">
+                            
+                            <datalist id="temporange">
+                                <option value="0.1" label="0">
+                                <option value="0.5">
+                                <option value="1.0">
+                                <option value="1.5">
+                                <option value="2.0">
+                                <option value="2.5">
+                                <option value="3.0">
+                                <option value="3.5">
+                                <option value="4.0" label="4">
+                            </datalist>
+                            <div id="tempo"></div>
+                        </div>
+                        <div class="pitch-box">
+                            Pitch: <br><input type="range" autofocus="true" min="0.1" max="2.0" name="pitchSlider" value="1.0" id="pitchSlider" step="0.01" list="pitchrange">
+                            <datalist id="pitchrange">
+                                <option value="0.1" label="0">
+                                <option value="0.5">
+                                <option value="1.0">
+                                <option value="1.5">
+                                <option value="2.0" label="2">
+                            </datalist>
+                            <div id="pitch"></div>
+                        </div>
+                    </div>
+                    <br><br><br><br>
+                    <div>
+                        <div class="key-box">
+                            Key: <br><input type="range" autofocus="true" min="-7.0" max="7.0" name="keySlider" value="0" id="keySlider" step="1" list="keyrange">
+                            <datalist id="keyrange">
+                                <option value="-7">
+                                <option value="-6">
+                                <option value="-5">
+                                <option value="-4">
+                                <option value="-3">
+                                <option value="-2">
+                                <option value="-1">
+                                <option value="0">
+                                <option value="1">
+                                <option value="2">
+                                <option value="3">
+                                <option value="4">
+                                <option value="5">
+                                <option value="6">
+                                <option value="7">
+                            </datalist>
+                            <div id="key"></div>
+                        </div>
+                        <div class="volum-box">
+                            Volum: <br><input type="range" autofocus="true" min="0.0" max="10.0" name="volumeSlider" value="1.0" id="volumeSlider" step="0.01" list="volumerange">
+                            <datalist id="volumerange">
+                                <option value="0.0" label="0">
+                                <option value="0.5">
+                                <option value="1.0">
+                                <option value="1.5">
+                                <option value="2.0" label="2">
+                                <option value="2.5">
+                                <option value="3.0">
+                                <option value="3.5">
+                                <option value="4.0" label="4">
+                                <option value="4.5">
+                                <option value="5.0">
+                                <option value="5.5">
+                                <option value="6.0" label="6">
+                                <option value="6.5">
+                                <option value="7.0">
+                                <option value="7.5">
+                                <option value="8.0" label="8">
+                                <option value="8.5">
+                                <option value="9.0">
+                                <option value="9.5">
+                                <option value="10.0" label="10">
+                            </datalist>
+                            <div id="volume"></div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class = "record-bt">
+                    &nbsp; &nbsp;
+                    <button id="mc_record"></button>
+                    <button id="mc_stop"></button>
+                    <br>
+                </div>
+                <div class = "record-result">
+                    <audio id="mc_audio"> </audio>
+                </div> 
+            </div>
+        </div>
+        <br><br><br>
+    </body>
+    <script type="module" src="main_script.js"></script>
 </html>
