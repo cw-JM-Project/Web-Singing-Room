@@ -28,22 +28,22 @@ Chrome 버전 90 이상 사용 권장
 
 ## 사용 예제
 
-<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278311-d7cd8880-b504-11eb-82da-79a471a88eae.png"></p>
 1. 웹 접속
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278826-5de9cf00-b505-11eb-9258-ef209042389b.png"></p>
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278464-fd5a9200-b504-11eb-82ee-ab40d0307b62.png"></p>
 2. 오디오 파일 입력
    2-1. 유튜브 URL-주소 입력하여 오디오 추출
    2-2. 사용자의 로컬에서 오디오 파일 선택
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278464-fd5a9200-b504-11eb-82ee-ab40d0307b62.png"></p>
 
 
-<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278502-077c9080-b505-11eb-925b-b7cde1afed36.png"></p>
 3. 재생 및 오디오 편집
+<p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278502-077c9080-b505-11eb-925b-b7cde1afed36.png"></p>
 
 
+4. 녹음 및 녹음 음성 재생
 <p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278562-15caac80-b505-11eb-9527-5dca6289e7ae.png"></p>
-4. 녹음 및 녹음된 음성 재생
 
 
 ## 개발 환경
@@ -53,9 +53,6 @@ Chrome 버전 90 이상 사용 권장
    사용 언어: Html, Css, Node.js
    IDE: Visual Studio Code
    
-## 업데이트 내역
-
-
 
 ## 참고
 
