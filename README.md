@@ -29,7 +29,7 @@ Chrome 버전 90 이상 사용 권장
 ## 사용 예제
 
 <p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278311-d7cd8880-b504-11eb-82da-79a471a88eae.png"></p>
-1. 사이트 접속 {:.aligncenter}
+1. 웹 접속
 
 
 <p align="center"><img src="https://user-images.githubusercontent.com/80367444/118278464-fd5a9200-b504-11eb-82ee-ab40d0307b62.png"></p>
