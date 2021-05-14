@@ -25,7 +25,7 @@ npm start
 http://localhost:8080/
 ```
 
-__*Chrome 버전 90 이상 사용 권장*__
+__*! Chrome 버전 90 이상 사용 권장 !*__
 
 
 ## 사용 예제
