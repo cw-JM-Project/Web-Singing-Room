@@ -32,7 +32,8 @@ http://localhost:8080/
 
 ![image](https://user-images.githubusercontent.com/74241604/118260281-0d667780-b4ed-11eb-8c2d-90384f20dc45.png)
 
-2. 유튜브 URL-주소 입력 (혹은 사용자 로컬에서 오디오 파일 불러오기 가능)
+2. 유튜브 URL-주소 입력
+   (혹은 사용자 로컬에서 오디오 파일 불러오기 가능)
 
 ![image](https://user-images.githubusercontent.com/74241604/118260331-23743800-b4ed-11eb-80e4-abe15d318af7.png)
 
