@@ -131,7 +131,7 @@ playMeter.addEventListener('click', function (event) { //재생 바(초단위)
   shifter.percentagePlayed = perc;
   playMeter.value = 100 * perc;
   currTime.innerHTML = shifter.timePlayed;
-  if (is_playing) {
+  if (!is_playing) {
     play();
   }
 });
