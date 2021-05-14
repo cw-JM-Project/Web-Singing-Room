@@ -11,13 +11,13 @@ Also, it includes the feature to record your voice while playing the edited audi
 
 ## 실행 방법 및 권장 
 
-On-line:
+-On-line:
 
 ```sh
 https://cw.audioeditjm.com
 ```
 
-Off-line:
+-Off-line:
 
 ```sh
 npm i
@@ -25,7 +25,7 @@ npm start
 http://localhost:8080/
 ```
 
-Chrome 버전 90 이상 사용 권장
+*Chrome 버전 90 이상 사용 권장*
 
 
 ## 사용 예제
