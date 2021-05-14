@@ -19,15 +19,32 @@ https://cw.audioeditjm.com
 Off-line:
 
 ```sh
-index.html
+npm i
+npm start
+http://localhost:8080/
 ```
 
 ## 사용 예제
 
+![image](https://user-images.githubusercontent.com/74241604/118260255-063f6980-b4ed-11eb-8eb7-af3b48b154ac.png)
+
+[전체 화면]
+
+![image](https://user-images.githubusercontent.com/74241604/118260281-0d667780-b4ed-11eb-8c2d-90384f20dc45.png)
+
+[유튜브 URL-주소 입력 화면]
+
+![image](https://user-images.githubusercontent.com/74241604/118260331-23743800-b4ed-11eb-80e4-abe15d318af7.png)
+
+[재생 및 오디오 편집 화면]
+
+![image](https://user-images.githubusercontent.com/74241604/118260376-338c1780-b4ed-11eb-8a3c-77b7672afff2.png)
+
+[녹음 된 음성 재생 화면]
 
 ## 개발 환경 설정
 
-
+    Chrome 버전 90 이상 사용 권장
 
 ## 업데이트 내역
 
@@ -38,15 +55,6 @@ index.html
 SoundTouchJS (URL : https://github.com/cutterbl/SoundTouchJS.git)
 
 deniscerri converter (URL : https://github.com/deniscerri/converter.git)
-
-
-## 기여 방법
-
-1. (<https://github.com/yourname/yourproject/fork>)을 포크합니다.
-2. (`git checkout -b feature/fooBar`) 명령어로 새 브랜치를 만드세요.
-3. (`git commit -am 'Add some fooBar'`) 명령어로 커밋하세요.
-4. (`git push origin feature/fooBar`) 명령어로 브랜치에 푸시하세요. 
-5. 풀리퀘스트를 보내주세요.
 
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
